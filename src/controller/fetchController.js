@@ -17,12 +17,19 @@ function objectToQueryString(obj) {
 
 export const callFhirApi = async (req, res) => {
   try {
+    console.log(req.method);
     const response = await FhirRequest.get(
       `${req.params.path}${objectToQueryString(req.query)}`
     );
-    return res.status(response.status).json(response.data);
+    return res
+      .status(response.status ?? httpStatus.NOT_FOUND)
+      .json(response.data);
   } catch (e) {
     console.log(e);
-    return Response.errorMessage(res, `Failed! ${req.params.path} is not supported with OPENMRS yet!`, httpStatus.NOT_FOUND);
+    return Response.errorMessage(
+      res,
+      `Failed! ${req.params.path} is not supported with OPENMRS yet!`,
+      httpStatus.NOT_FOUND
+    );
   }
 };
