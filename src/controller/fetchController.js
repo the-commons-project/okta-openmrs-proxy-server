@@ -17,7 +17,7 @@ function objectToQueryString(obj) {
 
 export const callFhirApi = async (req, res) => {
   try {
-    console.log(req.method);
+    // console.log(req.method);
     const response = await FhirRequest.get(
       `${req.params.path}${objectToQueryString(req.query)}`
     );
@@ -31,5 +31,17 @@ export const callFhirApi = async (req, res) => {
       `Failed! ${req.params.path} is not supported with OPENMRS yet!`,
       httpStatus.NOT_FOUND
     );
+  }
+};
+
+export const callWellKnown = async (req, res) => {
+  try {
+    const response = await axios.get(
+      "https://dev-96526247.okta.com/oauth2/aus9n87xinL3KPyXd5d7/.well-known/oauth-authorization-server"
+    );
+
+    return res.status(response.status).json(response.data);
+  } catch (err) {
+    return Response.errorMessage(res, `Failed!`, httpStatus.NOT_FOUND);
   }
 };

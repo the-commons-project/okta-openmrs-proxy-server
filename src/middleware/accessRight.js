@@ -33,7 +33,7 @@ export const verifyPatientAccess = async (req, res, next) => {
               scopes,
               `${req.params.path.toLowerCase()}.`
             );
-            console.log(authScopes, req.method);
+            // console.log(authScopes, req.method);
             if (authScopes.length > 0) {
               if (checkMethodExistence(authScopes, req.method.toLowerCase())) {
                 return next();

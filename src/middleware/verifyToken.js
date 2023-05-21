@@ -19,7 +19,7 @@ export const verifyUserToken = async (req, res, next) => {
     }
     const payload = decodeToken(token);
     const { patient, name } = payload;
-    console.log(payload);
+    // console.log(payload);
     if (name === "JsonWebTokenError") {
       return Response.errorMessage(
         res,
