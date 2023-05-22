@@ -18,7 +18,7 @@ app.use((req, res, next) => {
   // const error= new Error("Not Found ! Something Went Wrong ")
   return Response.errorMessage(
     res,
-    "Not Found ! Something Went Wrong!",
+    "URL Not Found ! Something Went Wrong!",
     Status.NOT_FOUND
   );
 });

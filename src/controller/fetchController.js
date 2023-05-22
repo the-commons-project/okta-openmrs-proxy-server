@@ -15,6 +15,10 @@ function objectToQueryString(obj) {
   return `?${keyValuePairs.join("&")}`;
 }
 
+export const welcomeFhir = async (req, res) => {
+  return Response.succesMessage(res,"Welcome to Patholar FHIR APIs",null,httpStatus.OK);
+};
+
 export const callFhirApi = async (req, res) => {
   try {
     // console.log(req.method);
@@ -37,10 +41,23 @@ export const callFhirApi = async (req, res) => {
 export const callWellKnown = async (req, res) => {
   try {
     const response = await axios.get(
-      "https://dev-96526247.okta.com/oauth2/aus9n87xinL3KPyXd5d7/.well-known/oauth-authorization-server"
+      "https://dev-96526247.okta.com/oauth2/aus9nb5v06MbLCO115d7/.well-known/oauth-authorization-server"
     );
 
-    return res.status(response.status).json(response.data);
+    return res.status(response.status).json({
+      ...response.data,
+      issuer: "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7",
+      authorization_endpoint:
+        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/smart/v1/authorize",
+      token_endpoint:
+        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/token",
+      registration_endpoint:
+        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/clients",
+      introspection_endpoint:
+        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/introspect",
+      jwks_uri:
+        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/keys",
+    });
   } catch (err) {
     return Response.errorMessage(res, `Failed!`, httpStatus.NOT_FOUND);
   }
