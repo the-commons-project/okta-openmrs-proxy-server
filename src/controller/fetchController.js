@@ -16,15 +16,33 @@ function objectToQueryString(obj) {
 }
 
 export const welcomeFhir = async (req, res) => {
-  return Response.succesMessage(res,"Welcome to Patholar FHIR APIs",null,httpStatus.OK);
+  return Response.succesMessage(
+    res,
+    "Welcome to Patholar FHIR APIs",
+    null,
+    httpStatus.OK
+  );
 };
 
 export const callFhirApi = async (req, res) => {
   try {
     // console.log(req.method);
+    const { category } = req.query;
+    if (category === "vital-signs") {
+      // console.log(category);
+      req.query.category = "exam";
+    }
     const response = await FhirRequest.get(
       `${req.params.path}${objectToQueryString(req.query)}`
     );
+    if (category === "vital-signs") {
+      response.data = JSON.parse(
+        JSON.stringify(response.data)
+          .replace(/exam/g, "vital-signs")
+          .replace(/Exam/g, "vital-signs")
+      );
+    }
+
     return res
       .status(response.status ?? httpStatus.NOT_FOUND)
       .json(response.data);

@@ -18,7 +18,7 @@ class HttpRequest {
     try {
       const res = await axios({
         method: "GET",
-        url: `https://ehr.patholar.com/openmrs/ws/fhir2/R4/${url}`,
+        url: `http://159.223.185.2:8080/openmrs/ws/fhir2/R4/${url}`,
         data,
         ...configs,
       });
