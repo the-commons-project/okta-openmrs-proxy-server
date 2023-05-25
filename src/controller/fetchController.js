@@ -26,7 +26,7 @@ export const welcomeFhir = async (req, res) => {
 
 export const callFhirApi = async (req, res) => {
   try {
-    // console.log(req.method);
+    console.log(req.method);
     const { category } = req.query;
     if (category === "vital-signs") {
       // console.log(category);
@@ -42,6 +42,25 @@ export const callFhirApi = async (req, res) => {
           .replace(/Exam/g, "vital-signs")
       );
     }
+
+    return res
+      .status(response.status ?? httpStatus.NOT_FOUND)
+      .json(response.data);
+  } catch (e) {
+    console.log(e);
+    return Response.errorMessage(
+      res,
+      `Failed! ${req.params.path} is not supported with OPENMRS yet!`,
+      httpStatus.NOT_FOUND
+    );
+  }
+};
+
+export const callFhirApiById = async (req, res) => {
+  try {
+    const response = await FhirRequest.get(
+      `${req.params.path}/${req.params.id}`
+    );
 
     return res
       .status(response.status ?? httpStatus.NOT_FOUND)

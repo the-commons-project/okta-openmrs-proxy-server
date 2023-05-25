@@ -4,6 +4,7 @@ import {
   callFhirApi,
   callWellKnown,
   welcomeFhir,
+  callFhirApiById,
 } from "../controller/fetchController";
 import { verifyUserToken } from "../middleware/verifyToken";
 import { verifyPatientAccess } from "../middleware/accessRight";
@@ -13,9 +14,16 @@ route.get("/", welcomeFhir);
 route.get("/.well-known/smart-configuration", callWellKnown);
 route.get(
   "/:path",
-    verifyUserToken,
-  verifyPatientAccess,
+  //     verifyUserToken,
+  //   verifyPatientAccess,
   callFhirApi
+);
+
+route.get(
+  "/:path/:id",
+  //     verifyUserToken,
+  //   verifyPatientAccess,
+  callFhirApiById
 );
 
 export default route;
