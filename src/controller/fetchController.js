@@ -78,23 +78,24 @@ export const callFhirApiById = async (req, res) => {
 export const callWellKnown = async (req, res) => {
   try {
     const response = await axios.get(
-      "https://dev-96526247.okta.com/oauth2/aus9nb5v06MbLCO115d7/.well-known/oauth-authorization-server"
+      "https://auth.patholar.co.uk/sof/.well-known/smart-configuration"
     );
 
-    return res.status(response.status).json({
-      ...response.data,
-      issuer: "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7",
-      authorization_endpoint:
-        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/smart/v1/authorize",
-      token_endpoint:
-        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/token",
-      registration_endpoint:
-        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/clients",
-      introspection_endpoint:
-        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/introspect",
-      jwks_uri:
-        "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/keys",
-    });
+    return res.status(response.status).json(response.data);
+    //     {
+    //     ...response.data,
+    //     issuer: "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7",
+    //     authorization_endpoint:
+    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/smart/v1/authorize",
+    //     token_endpoint:
+    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/token",
+    //     registration_endpoint:
+    //       "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/clients",
+    //     introspection_endpoint:
+    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/introspect",
+    //     jwks_uri:
+    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/keys",
+    //  }
   } catch (err) {
     return Response.errorMessage(res, `Failed!`, httpStatus.NOT_FOUND);
   }
