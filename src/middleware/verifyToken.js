@@ -18,7 +18,7 @@ export const verifyUserToken = async (req, res, next) => {
       );
     }
     const payload = decodeToken(token);
-    const { patient, name } = payload;
+    const { patient, launch_response_patient, name } = payload;
     // console.log(payload);
     if (name === "JsonWebTokenError") {
       return Response.errorMessage(
@@ -33,7 +33,7 @@ export const verifyUserToken = async (req, res, next) => {
         status.UNAUTHORIZED
       );
     }
-    if (!patient) {
+    if (!patient && !launch_response_patient) {
       return Response.errorMessage(
         res,
         "Patient from token not exist, invalid token",
@@ -42,6 +42,9 @@ export const verifyUserToken = async (req, res, next) => {
     }
 
     req.payload = payload;
+    if (launch_response_patient) {
+      req.payload.patient = launch_response_patient;
+    }
     return next();
   } catch (error) {
     console.log(error.message);

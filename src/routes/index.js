@@ -14,15 +14,15 @@ route.get("/", welcomeFhir);
 route.get("/.well-known/smart-configuration", callWellKnown);
 route.get(
   "/:path",
-  //     verifyUserToken,
-  //   verifyPatientAccess,
+      verifyUserToken,
+    verifyPatientAccess,
   callFhirApi
 );
 
 route.get(
   "/:path/:id",
-  //     verifyUserToken,
-  //   verifyPatientAccess,
+      verifyUserToken,
+    verifyPatientAccess,
   callFhirApiById
 );
 
