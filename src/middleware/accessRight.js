@@ -5,8 +5,8 @@ const scopes = ["openid", "launch", "launch/patient", "patient/*.read"];
 
 function filterPatientValues(array, value) {
   return array
-    .filter((va) => va.includes(value))
-    .map((val) => val.replace(value, ""));
+    ?.filter((va) => va.includes(value))
+    ?.map((val) => val.replace(value, ""));
 }
 
 function checkMethodExistence(array, method) {
@@ -18,7 +18,7 @@ function checkMethodExistence(array, method) {
 export const verifyPatientAccess = async (req, res, next) => {
   try {
     const { patient, launch_response_patient, _id } = req.query;
-    const scopes = filterPatientValues(req.payload.scp, "patient/");
+    // const scopes = filterPatientValues(req.payload.scp, "patient/");
     // const scopes = filterPatientValues(
     //   ["patient/patient.r", "patient/patient.c"],
 
@@ -83,7 +83,7 @@ export const verifyPatientAccess = async (req, res, next) => {
       httpStatus.UNAUTHORIZED
     );
   } catch (error) {
-    // console.log(error.message);
+    console.log(error.message);
     Response.errorMessage(
       res,
       "Internal server error!",
