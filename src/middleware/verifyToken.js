@@ -40,11 +40,15 @@ export const verifyUserToken = async (req, res, next) => {
         status.UNAUTHORIZED
       );
     }
-
+    // console.log(payload);
     req.payload = payload;
     if (launch_response_patient) {
       req.payload.patient = launch_response_patient;
     }
+    console.log(
+      "(----------------------------------------------------------------)"
+    );
+    // console.log(req.payload);
     return next();
   } catch (error) {
     console.log(error.message);

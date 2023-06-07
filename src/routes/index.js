@@ -22,7 +22,7 @@ route.get(
 route.get(
   "/:path/:id",
       verifyUserToken,
-    verifyPatientAccess,
+    // verifyPatientAccess,
   callFhirApiById
 );
 
