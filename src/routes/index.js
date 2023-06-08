@@ -4,13 +4,14 @@ import {
   callFhirApi,
   callWellKnown,
   welcomeFhir,
-  callFhirApiById,
+  callFhirApiById,callFhirApiMetadata
 } from "../controller/fetchController";
 import { verifyUserToken } from "../middleware/verifyToken";
 import { verifyPatientAccess } from "../middleware/accessRight";
 const route = Router();
 
 route.get("/", welcomeFhir);
+route.get("/metadata", callFhirApiMetadata);
 route.get("/.well-known/smart-configuration", callWellKnown);
 route.get(
   "/:path",

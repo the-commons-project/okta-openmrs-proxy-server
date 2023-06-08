@@ -46,7 +46,7 @@ export const verifyUserToken = async (req, res, next) => {
       req.payload.patient = launch_response_patient;
     }
     console.log(
-      "(----------------------------------------------------------------)"
+      "------------------------------><----------------------------------"
     );
     // console.log(req.payload);
     return next();

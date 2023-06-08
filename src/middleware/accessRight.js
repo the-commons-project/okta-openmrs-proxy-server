@@ -10,7 +10,13 @@ function filterPatientValues(array, value) {
 }
 
 function checkMethodExistence(array, method) {
-  var methods = { get: "r", post: "c", patch: "u", delete: "d", search: "s" };
+  var methods = {
+    get: "read",
+    post: "create",
+    patch: "update",
+    delete: "delete",
+    search: "search",
+  };
 
   return array.includes(methods[method]);
 }
@@ -18,13 +24,14 @@ function checkMethodExistence(array, method) {
 export const verifyPatientAccess = async (req, res, next) => {
   try {
     const { patient, launch_response_patient, _id } = req.query;
-    // const scopes = filterPatientValues(req.payload.scp, "patient/");
+    const scopes = filterPatientValues(req.payload.scp, "patient/");
     // const scopes = filterPatientValues(
     //   ["patient/patient.r", "patient/patient.c"],
 
     //   "patient/"
     // );
 
+  
     if (
       req.payload.patient === patient ||
       req.payload.patient === launch_response_patient ||
@@ -32,35 +39,36 @@ export const verifyPatientAccess = async (req, res, next) => {
     ) {
       if (req.payload.scp.includes("openid")) {
         if (req.payload.scp.includes("launch/patient")) {
-          return next();
+          // return next();
           //--------------------------------------------------------> To Allow Scopes Uncomment the following lines -------------------------------------------------------->
-          // if (scopes.length > 0) {
-          //   const authScopes = filterPatientValues(
-          //     scopes,
-          //     `${req.params.path.toLowerCase()}.`
-          //   );
-          //   // console.log(authScopes, req.method);
-          //   if (authScopes.length > 0) {
-          //     if (checkMethodExistence(authScopes, req.method.toLowerCase())) {
-          //       return next();
-          //     }
-          //     return Response.errorMessage(
-          //       res,
-          //       "Unauthorized! No permission based on scope operation you provided, please,check your consent.",
-          //       httpStatus.UNAUTHORIZED
-          //     );
-          //   }
-          //   return Response.errorMessage(
-          //     res,
-          //     "Unauthorized! No permission scope syntax is not valid. Missing scope operation. eg: patient/*.r ",
-          //     httpStatus.BAD_REQUEST
-          //   );
-          // }
-          // return Response.errorMessage(
-          //   res,
-          //   "Unauthorized! No permission to retrieve information about the current patient. Missing scope to authorise eg: patient/*.r ",
-          //   httpStatus.UNAUTHORIZED
-          // );
+          if (scopes.length > 0) {
+            const authScopes = filterPatientValues(
+              scopes,
+              `${req.params.path}.`
+            );
+
+            console.log(authScopes,req.params.path.toLowerCase(), req.method);
+            if (authScopes.length > 0) {
+              if (checkMethodExistence(authScopes, req.method.toLowerCase())) {
+                return next();
+              }
+              return Response.errorMessage(
+                res,
+                "Unauthorized! No permission based on scope operation you provided, please,check your consent.",
+                httpStatus.UNAUTHORIZED
+              );
+            }
+            return Response.errorMessage(
+              res,
+              "Unauthorized! No permission scope syntax is not valid. Missing scope operation. eg: patient/*.r ",
+              httpStatus.BAD_REQUEST
+            );
+          }
+          return Response.errorMessage(
+            res,
+            "Unauthorized! No permission to retrieve information about the current patient. Missing scope to authorise eg: patient/*.r ",
+            httpStatus.UNAUTHORIZED
+          );
         }
 
         return Response.errorMessage(

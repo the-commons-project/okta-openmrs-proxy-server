@@ -75,6 +75,26 @@ export const callFhirApiById = async (req, res) => {
   }
 };
 
+
+export const callFhirApiMetadata = async (req, res) => {
+  try {
+    const response = await FhirRequest.get(
+      `metadata`
+    );
+
+    return res
+      .status(response.status ?? httpStatus.NOT_FOUND)
+      .json(response.data);
+  } catch (e) {
+    console.log(e);
+    return Response.errorMessage(
+      res,
+      `Failed! ${req.params.path} is not supported with OPENMRS yet!`,
+      httpStatus.NOT_FOUND
+    );
+  }
+};
+
 export const callWellKnown = async (req, res) => {
   try {
     const response = await axios.get(
