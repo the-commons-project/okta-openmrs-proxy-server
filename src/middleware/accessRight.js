@@ -31,7 +31,6 @@ export const verifyPatientAccess = async (req, res, next) => {
     //   "patient/"
     // );
 
-  
     if (
       req.payload.patient === patient ||
       req.payload.patient === launch_response_patient ||
@@ -47,7 +46,7 @@ export const verifyPatientAccess = async (req, res, next) => {
               `${req.params.path}.`
             );
 
-            console.log(authScopes,req.params.path.toLowerCase(), req.method);
+            console.log(authScopes, req.params.path.toLowerCase(), req.method);
             if (authScopes.length > 0) {
               if (checkMethodExistence(authScopes, req.method.toLowerCase())) {
                 return next();
@@ -60,7 +59,7 @@ export const verifyPatientAccess = async (req, res, next) => {
             }
             return Response.errorMessage(
               res,
-              "Unauthorized! No permission scope syntax is not valid. Missing scope operation. eg: patient/*.r ",
+              "Unauthorized! The patient didn't allow to share this resource.",
               httpStatus.BAD_REQUEST
             );
           }
