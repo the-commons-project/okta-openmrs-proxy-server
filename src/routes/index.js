@@ -4,7 +4,8 @@ import {
   callFhirApi,
   callWellKnown,
   welcomeFhir,
-  callFhirApiById,callFhirApiMetadata
+  callFhirApiById,
+  callFhirApiMetadata,
 } from "../controller/fetchController";
 import { verifyUserToken } from "../middleware/verifyToken";
 import { verifyPatientAccess } from "../middleware/accessRight";
@@ -15,15 +16,15 @@ route.get("/metadata", callFhirApiMetadata);
 route.get("/.well-known/smart-configuration", callWellKnown);
 route.get(
   "/:path",
-      verifyUserToken,
-    verifyPatientAccess,
+  //   verifyUserToken,
+  // verifyPatientAccess,
   callFhirApi
 );
 
 route.get(
   "/:path/:id",
-      verifyUserToken,
-    // verifyPatientAccess,
+  //   verifyUserToken,
+  // verifyPatientAccess,
   callFhirApiById
 );
 

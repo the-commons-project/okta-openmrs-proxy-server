@@ -10,7 +10,7 @@ const configs = {
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI1IiwianRpIjoiZTVkYThmYjE5MWIxMWIxNDMxMDc0MzQwZDQ2YjczMGJkMjVhY2VkY2VmNzJmYTBiNjQ5MzlmYTUzNjg2ZGJlMjEyZTA1YmUxZThiZTEzYWEiLCJpYXQiOjE2NjU3NDY5MzAuNzgyMTE2LCJuYmYiOjE2NjU3NDY5MzAuNzgyMTE5LCJleHAiOjE2OTcyODI5MzAuNzc4NTc4LCJzdWIiOiIxNDciLCJzY29wZXMiOltdfQ.Z-YGA1VVhDfjaneUqkbAgVfPq2Y1-7Rz9_hmPWzKldmXgVPQuKVkPH9f0zSPhgTzymeMHrY1GLWor2ddOSo-xiV2curj7DtWvKDbDAzdc3W6-qeVNVhzqejGT1LzLJ29oIX1f0O0MwZyEdMcQrrzY5owWREZJ4e9e2Kc2A5XWaNBdj8a6LFeiQIlF-G7PPkSw004u-jH0z38VLLnpZmgE_5dJaGO_CLBroHjJFt1SJRt3Gs1jRQrg30t__56HCSneDfUAP_obEoWwqdjs644oITLIUALPh8vJD55EFOFWUwRAZF_cbWtUeHUq0ASjGOcYYLuPqLz2s72F47lLbopC6ATyU-pdNwEhJgOFE0sxJH9HD_gFlQqJXGMHLHiE-xmiFt5C8aojr8fifHq1XNGDcOH9uaKfhdrWMmX6mGllW1xTNJWmIB7bnQstEtqiPtq-pzD9qakZrr1KtTYvmRXBdtR0fsyfNCaOSNZn7aBrrhfNZsIl3rxCN4jF9OyyBKxL0pHcylq6RIBEf_-wUZyEtLL4ibY3FPyWa2UDRRZ0mm5vCr_o1YFgb9fkxI6roFlPiEOElEgZ9KvltEZEpK0HMTkVo__yRT-Thf-50j3K71Q4RwzxmduTXuQCuok1sM8O911Bo-ud3bmgmHjkQHU9MucOJk9YZrcBGhhzriDwRQ",
     "Content-Type": "application/json",
     Authorization: "Basic YWRtaW46QWRtaW4xMjM=",
-    Cookie: "JSESSIONID=827C199D9367EC5311C80081A8309169",
+    Cookie: "JSESSIONID=9C792FC222DCF97510B667D8CAC6BFF2",
   },
 };
 class HttpRequest {
@@ -18,7 +18,7 @@ class HttpRequest {
     try {
       const res = await axios({
         method: "GET",
-        url: `http://159.223.185.2:8080/openmrs/ws/fhir2/R4/${url}`,
+        url: `https://emr.patholar.com/openmrs/ws/fhir2/R4/${url}`,
         data,
         ...configs,
       });
