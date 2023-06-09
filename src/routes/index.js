@@ -14,18 +14,8 @@ const route = Router();
 route.get("/", welcomeFhir);
 route.get("/metadata", callFhirApiMetadata);
 route.get("/.well-known/smart-configuration", callWellKnown);
-route.get(
-  "/:path",
-  //   verifyUserToken,
-  // verifyPatientAccess,
-  callFhirApi
-);
+route.get("/:path", verifyUserToken, verifyPatientAccess, callFhirApi);
 
-route.get(
-  "/:path/:id",
-  //   verifyUserToken,
-  // verifyPatientAccess,
-  callFhirApiById
-);
+route.get("/:path/:id", verifyUserToken, verifyPatientAccess, callFhirApiById);
 
 export default route;
