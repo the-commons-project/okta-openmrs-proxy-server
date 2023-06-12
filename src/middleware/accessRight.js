@@ -23,18 +23,21 @@ function checkMethodExistence(array, method) {
 
 export const verifyPatientAccess = async (req, res, next) => {
   try {
+    // console.log()
     const { patient, launch_response_patient, _id } = req.query;
+    const { id } = req.params;
     const scopes = filterPatientValues(req.payload.scp, "patient/");
     // const scopes = filterPatientValues(
     //   ["patient/patient.r", "patient/patient.c"],
 
     //   "patient/"
     // );
-
+    // console.log(req.payload);
     if (
       req.payload.patient === patient ||
       req.payload.patient === launch_response_patient ||
-      req.payload.patient === _id
+      req.payload.patient === _id ||
+      req.payload.patient === id
     ) {
       if (req.payload.scp.includes("openid")) {
         if (req.payload.scp.includes("launch/patient")) {

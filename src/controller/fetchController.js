@@ -26,7 +26,7 @@ export const welcomeFhir = async (req, res) => {
 
 export const callFhirApi = async (req, res) => {
   try {
-    console.log(req.method);
+    // console.log(req.method);
     const { category } = req.query;
     if (category === "vital-signs") {
       // console.log(category);
