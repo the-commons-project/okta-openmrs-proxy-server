@@ -3,7 +3,7 @@ import axios from "axios";
 import FhirRequest from "../utils/HttpRequest";
 import Response from "../utils/Response";
 
-function objectToQueryString(obj) {
+function objectToQueryString(obj) 
   const keyValuePairs = [];
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
