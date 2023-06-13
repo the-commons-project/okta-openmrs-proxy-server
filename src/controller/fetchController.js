@@ -3,7 +3,7 @@ import axios from "axios";
 import FhirRequest from "../utils/HttpRequest";
 import Response from "../utils/Response";
 
-function objectToQueryString(obj) 
+function objectToQueryString(obj) {
   const keyValuePairs = [];
   for (const key in obj) {
     if (obj.hasOwnProperty(key)) {
@@ -75,12 +75,60 @@ export const callFhirApiById = async (req, res) => {
   }
 };
 
-
 export const callFhirApiMetadata = async (req, res) => {
   try {
-    const response = await FhirRequest.get(
-      `metadata`
-    );
+    const response = await FhirRequest.get(`metadata`);
+
+    const security = {
+      extension: [
+        {
+          extension: [
+            {
+              valueUri:
+                "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/token",
+              url: "token",
+            },
+            {
+              valueUri:
+                "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/revoke",
+              url: "revoke",
+            },
+            {
+              valueUri:
+                "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/smart/v1/authorize",
+              url: "authorize",
+            },
+            // {
+            //   valueUri:
+            //     "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/smart/v1/my-authorizations",
+            //   url: "manage",
+            // },
+            {
+              valueUri:
+                "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/introspect",
+              url: "introspect",
+            },
+          ],
+          url: "http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris",
+        },
+      ],
+      cors: true,
+      service: [
+        {
+          coding: [
+            {
+              system:
+                "http://terminology.hl7.org/CodeSystem/restful-security-service",
+              code: "SMART-on-FHIR",
+            },
+          ],
+          text: "OAuth2 using SMART-on-FHIR profile (see http://docs.smarthealthit.org/).",
+        },
+      ],
+      description: "OAuth2 plus SMART extensions",
+    };
+
+    response.data.rest[0].security = security;
 
     return res
       .status(response.status ?? httpStatus.NOT_FOUND)
