@@ -148,7 +148,7 @@ export const callWellKnown = async (req, res) => {
     const response = await axios.get(
       "https://auth.patholar.co.uk/sof/.well-known/smart-configuration"
     );
-
+    delete response.data.registration_endpoint;
     return res.status(response.status).json(response.data);
     //     {
     //     ...response.data,
