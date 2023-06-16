@@ -1,10 +1,10 @@
-# FHIR Proxy Server
+# FHIR PROXY SERVER
 
-The FHIR Proxy Server is a lightweight application designed to act as an intermediary between client applications and FHIR servers. It provides a set of functionalities to enhance and secure the communication between clients and FHIR servers. This README file provides an overview of the FHIR Proxy Server, its features, installation instructions, and usage guidelines.
+The Fhir proxy server is a lightweight application designed to act as an intermediary between client applications and FHIR server. In our development it provides a set of functionalities to enhance and secure the communication between smartonfhir implementation and FHIR apis present in our openmrs instance. This README file provides an overview of this proxy,prerequisites, its features and installation guidelines.
 
 ## Prerequisites
 
-Before installing and running the FHIR Proxy Server, ensure that you have the following prerequisites:
+Before installing and running this proxy, ensure that you have the following prerequisites:
 
 - **Node.js**: Make sure you have Node.js installed on your system. You can download Node.js from the official website: [https://nodejs.org](https://nodejs.org). The server has been tested with Node.js version v18.15.0
 
@@ -29,7 +29,7 @@ To install and run the FHIR Proxy Server, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Patholar/openmrs-proxy.git
+   git clone https://github.com/Patholar/fhir-proxy-server.git
    cd openmrs-proxy
 2. install packages
    ```bash
