@@ -2,7 +2,6 @@
   "authorization_endpoint": "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/smart/v1/authorize",
   "token_endpoint": "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/token",
   "token_endpoint_auth_methods_supported": ["client_secret_basic"],
-  "registration_endpoint": "authz_registration_endpoint_here_if_applicable",
   "scopes_supported": [
     "openid",
     "email",
