@@ -3,6 +3,8 @@ import axios from "axios";
 import FhirRequest from "../utils/HttpRequest";
 import Response from "../utils/Response";
 
+// import .wellknown
+import wellknown from "../smart_urls.json";
 function objectToQueryString(obj) {
   const keyValuePairs = [];
   for (const key in obj) {
@@ -145,25 +147,11 @@ export const callFhirApiMetadata = async (req, res) => {
 
 export const callWellKnown = async (req, res) => {
   try {
-    const response = await axios.get(
-      "https://auth.patholar.co.uk/sof/.well-known/smart-configuration"
-    );
-    delete response.data.registration_endpoint;
-    return res.status(response.status).json(response.data);
-    //     {
-    //     ...response.data,
-    //     issuer: "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7",
-    //     authorization_endpoint:
-    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/smart/v1/authorize",
-    //     token_endpoint:
-    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/token",
-    //     registration_endpoint:
-    //       "https://www.patholar.co.uk/oauth2/aus9nb5v06MbLCO115d7/v1/clients",
-    //     introspection_endpoint:
-    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/introspect",
-    //     jwks_uri:
-    //       "https://sof.patholar.co.uk/oauth2/aus9rznmmbdD0a4zB5d7/v1/keys",
-    //  }
+    // const response = await axios.get(
+    //   "https://auth.patholar.co.uk/sof/.well-known/smart-configuration"
+    // );
+    // delete response.data.registration_endpoint;
+    return res.status(200).json(wellknown);
   } catch (err) {
     return Response.errorMessage(res, `Failed!`, httpStatus.NOT_FOUND);
   }
