@@ -1,6 +1,6 @@
 # FHIR PROXY SERVER
 
-The Fhir proxy server is a lightweight application designed to act as an intermediary between client applications and FHIR server. In our development it provides a set of functionalities to enhance and secure the communication between smartonfhir implementation and FHIR apis present in our openmrs instance. This README file provides an overview of this proxy,prerequisites, its features and installation guidelines.
+The Fhir proxy server is a lightweight application designed to act as an intermediary between client applications and the FHIR server. In our development, it provides a set of functionalities to enhance and secure the communication between smartonfhir implementation and FHIR APIs present in our openmrs instance. This README file provides an overview of this proxy, its prerequisites, its features, and installation guidelines.
 
 ## Prerequisites
 
@@ -38,3 +38,24 @@ To install and run the FHIR Proxy Server, follow these steps:
    ```bash
    yarn dev
    
+## Folder Structure
+
+### src
+
+#### Controllers: 
+This folder contains the controllers responsible for handling the business logic of the proxy server application. Each controller represents a specific functionality or a set of related functionalities. Controllers interact with fetching fhir api and send appropriate responses back to the client.
+
+#### Middleware: 
+The middleware folder contains the middleware functions that are used to process incoming requests before they reach the controllers. Middleware functions can perform tasks such as authentication, request validation, logging, etc. These functions are executed in the order they are defined, and they can modify the request or response objects as needed. Common examples of middleware include authentication middleware, error handling middleware, and logging middleware.
+
+#### Routes: 
+The routes folder contains the route definitions for the proxy server. Routes define the URL paths and the corresponding controller methods that should be executed when a request is made to a specific URL. Each route maps to a specific controller method.
+
+#### Utils: 
+The utils folder contains utility functions or modules that are used across different parts of the proxy server. These utilities can include helper functions, token functions, HTTP request functions, response functions, and other reusable code that doesn't fit directly into controllers. Placing them in the utils folder helps to keep the codebase organized and promotes reusability.
+
+#### server.js
+This js file contains the code for starting and configuring the server, enabling cors, and handling HTTP requests.
+
+#### smart_urls.json
+This JSON file contains .wellknown data.
