@@ -1,4 +1,4 @@
-# FHIR PROXY SERVER
+# SMART OPENMRS PROXY SERVER
 
 The Fhir proxy server is a lightweight application designed to act as an intermediary between client applications and the FHIR server. In our development, it provides a set of functionalities to enhance and secure the communication between smartonfhir implementation and FHIR APIs present in our openmrs instance. This README file provides an overview of this proxy, its prerequisites, its features, and installation guidelines.
 
