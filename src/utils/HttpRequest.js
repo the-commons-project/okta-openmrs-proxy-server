@@ -18,7 +18,7 @@ class HttpRequest {
     try {
       const res = await axios({
         method: "GET",
-        url: `https://emr.patholar.com/openmrs/ws/fhir2/R4/${url}`,
+        url: `https://openmrs.tcpdev.org/openmrs/ws/fhir2/R4/${url}`,
         data,
         ...configs,
       });
